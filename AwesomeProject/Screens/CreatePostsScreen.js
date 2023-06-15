@@ -34,8 +34,8 @@ export const CreatePostsScreen = () => {
         </View>
         <Text style={styles.text}>Завантажте фото</Text>
         <View style={styles.formContainer}>
-          <TextInput style={styles.inputName} placeholder="Назва" />
-          <TextInput style={styles.input} placeholder="Місцевість" />
+          <TextInput style={styles.inputName} placeholder="Назва..." />
+          <TextInput style={styles.input} placeholder="Місцевість..." />
           <Feather
             style={styles.iconMap}
             name="map-pin"
@@ -71,11 +71,12 @@ const styles = StyleSheet.create({
     paddingBottom: 11,
     borderBottomWidth: 1,
     width: windowWidth,
+    borderColor: "rgba(232, 232, 232, 1)",
   },
   headerText: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginRight: 10,
+    color: "#212121",
+    fontSize: 17,
+    fontWeight: "500",
   },
   arrowLeft: {
     position: "absolute",
