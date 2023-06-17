@@ -17,7 +17,7 @@ import { AntDesign } from "@expo/vector-icons";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-export const RegistrationScreen = () => {
+const RegistrationScreen = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoginFocused, setLoginFocused] = useState(false);
   const [isEmailFocused, setEmailFocused] = useState(false);
@@ -126,6 +126,7 @@ export const RegistrationScreen = () => {
   );
 };
 
+export default RegistrationScreen;
 const styles = StyleSheet.create({
   container: {
     position: "relative",

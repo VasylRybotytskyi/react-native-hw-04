@@ -15,7 +15,7 @@ import { Button } from "react-native-elements";
 const windowWidth = Dimensions.get("window").width; // Для ширини екрану
 const windowHeight = Dimensions.get("window").height; // Для висоти екрану
 
-export const LoginScreen = () => {
+const LoginScreen = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -83,9 +83,9 @@ export const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     position: "relative",
+    flex: 1,
   },
   imageBackground: {
-    flex: 1,
     width: windowWidth,
     height: windowHeight,
   },
@@ -178,3 +178,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
+export default LoginScreen;
