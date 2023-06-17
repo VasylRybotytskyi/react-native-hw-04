@@ -6,16 +6,21 @@ import { PostsScreen } from "./Screens/PostsScreen";
 import { CreatePostsScreen } from "./Screens/CreatePostsScreen";
 import { CommentsScreen } from "./Screens/CommentsScreen";
 import { ProfileScreenn } from "./Screens/ProfileScreen";
+import { Home } from "./Screens/Home";
+import "react-native-gesture-handler";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      {/* <PostsScreen /> */}
-      {/* <RegistrationScreen /> */}
-      {/* <LoginScreen /> */}
-      {/* <CreatePostsScreen /> */}
-      {/* <CommentsScreen /> */}
-      <ProfileScreenn />
+      <NavigationContainer>
+        <Home />
+        {/* <PostsScreen /> */}
+        {/* <RegistrationScreen /> */}
+        {/* <LoginScreen /> */}
+        {/* <CreatePostsScreen /> */}
+        {/* <CommentsScreen /> */}
+        {/* <ProfileScreenn /> */}
+      </NavigationContainer>
     </View>
   );
 }

@@ -12,7 +12,7 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import { Button } from "react-native-elements";
-import { AntDesign, Ionicons } from "@expo/vector-icons";
+import { AntDesign, Ionicons, Feather } from "@expo/vector-icons";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -36,6 +36,20 @@ export const ProfileScreenn = () => {
               size={24}
               color="rgba(189, 189, 189, 1)"
             />
+            <View>
+              <Text>View</Text>
+            </View>
+          </View>
+          <View style={styles.iconsContainer}>
+            <View style={styles.tool}>
+              <Feather name="grid" size={24} color="black" />
+            </View>
+            <View style={styles.buttonAdd}>
+              <Feather name="user" size={24} color="white" />
+            </View>
+            <View style={styles.user}>
+              <Ionicons name="ios-add-outline" size={24} color="black" />
+            </View>
           </View>
         </ImageBackground>
       </View>
@@ -45,7 +59,7 @@ export const ProfileScreenn = () => {
 
 const styles = StyleSheet.create({
   container: {
-    position: "relative",
+    flex: 1,
   },
   imageBackground: {
     flex: 1,
@@ -75,7 +89,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#212121",
   },
-
   image: {
     position: "absolute",
     width: 120,
@@ -90,10 +103,41 @@ const styles = StyleSheet.create({
     right: -12,
     color: "rgba(255, 108, 0, 1)",
   },
-
   logout: {
     position: "absolute",
     right: 16,
     top: 15,
+  },
+  iconsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 93,
+    paddingBottom: 42,
+    paddingTop: 9,
+    borderTopWidth: 1,
+    backgroundColor: "#FFFFFF",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    width: windowWidth,
+  },
+  buttonAdd: {
+    color: "#FFFFFF",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#FF6C00",
+    borderRadius: 20,
+    width: 70,
+    height: 40,
+  },
+  tool: {
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  user: {
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
