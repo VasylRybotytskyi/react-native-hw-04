@@ -15,7 +15,7 @@ import { Button } from "react-native-elements";
 const windowWidth = Dimensions.get("window").width; // Для ширини екрану
 const windowHeight = Dimensions.get("window").height; // Для висоти екрану
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,6 +28,7 @@ const LoginScreen = () => {
     console.debug("SingIn!");
     console.debug("Email:", email);
     console.debug("Password:", password);
+    navigation.navigate("Home");
   };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -58,7 +59,7 @@ const LoginScreen = () => {
                 </Text>
               </TouchableOpacity>
             </View>
-            <TouchableOpacity style={styles.buttonContainer} onPress={() => {}}>
+            <TouchableOpacity style={styles.buttonContainer}>
               <Button
                 title="Увійти"
                 buttonStyle={styles.button}
@@ -68,7 +69,10 @@ const LoginScreen = () => {
             <View style={styles.registerContainer}>
               <Text style={styles.registerText}>Немає акаунту?</Text>
               <TouchableOpacity onPress={() => {}}>
-                <Text style={[styles.registerText, styles.registerLink]}>
+                <Text
+                  style={[styles.registerText, styles.registerLink]}
+                  onPress={() => navigation.navigate("RegistrationScreen")}
+                >
                   Зареєструватися
                 </Text>
               </TouchableOpacity>

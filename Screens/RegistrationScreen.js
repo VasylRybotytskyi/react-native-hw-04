@@ -17,7 +17,7 @@ import { AntDesign } from "@expo/vector-icons";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-const RegistrationScreen = () => {
+const RegistrationScreen = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoginFocused, setLoginFocused] = useState(false);
   const [isEmailFocused, setEmailFocused] = useState(false);
@@ -55,6 +55,7 @@ const RegistrationScreen = () => {
     console.debug("Email:", email);
     console.debug("Password:", password);
     // Додати логіку для збереження та використання введених даних
+    navigation.navigate("Home");
   };
 
   return (
@@ -113,7 +114,9 @@ const RegistrationScreen = () => {
             </TouchableOpacity>
             <View style={styles.registerContainer}>
               <Text style={styles.registerText}>Вже є акаунт?</Text>
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("LoginScreen")}
+              >
                 <Text style={[styles.registerText, styles.registerLink]}>
                   Увійти
                 </Text>
@@ -129,10 +132,10 @@ const RegistrationScreen = () => {
 export default RegistrationScreen;
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     position: "relative",
   },
   imageBackground: {
-    flex: 1,
     width: windowWidth,
     height: windowHeight,
   },
