@@ -15,7 +15,7 @@ import { AntDesign, Ionicons, Feather } from "@expo/vector-icons";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-export const ProfileScreenn = () => {
+const ProfileScreen = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -38,7 +38,7 @@ export const ProfileScreenn = () => {
               <Text>View</Text>
             </View>
           </View>
-          <View style={styles.iconsContainer}>
+          {/* <View style={styles.iconsContainer}>
             <View style={styles.tool}>
               <Feather name="grid" size={24} color="black" />
             </View>
@@ -48,13 +48,13 @@ export const ProfileScreenn = () => {
             <View style={styles.user}>
               <Ionicons name="ios-add-outline" size={24} color="black" />
             </View>
-          </View>
+          </View> */}
         </ImageBackground>
       </View>
     </TouchableWithoutFeedback>
   );
 };
-
+export default ProfileScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -106,36 +106,35 @@ const styles = StyleSheet.create({
     right: 16,
     top: 15,
   },
-  iconsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: 93,
-    paddingBottom: 42,
-    paddingTop: 9,
-    borderTopWidth: 1,
-    backgroundColor: "#FFFFFF",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    width: windowWidth,
-  },
-  buttonAdd: {
-    color: "#FFFFFF",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#FF6C00",
-    borderRadius: 20,
-    width: 70,
-    height: 40,
-  },
-  tool: {
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  user: {
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  // iconsContainer: {
+  //   flexDirection: "row",
+  //   justifyContent: "space-between",
+  //   paddingHorizontal: 93,
+  //   paddingBottom: 42,
+  //   paddingTop: 9,
+  //   borderTopWidth: 1,
+  //   backgroundColor: "#FFFFFF",
+  //   position: "absolute",
+  //   bottom: 0,
+  //   left: 0,
+  //   width: windowWidth,
+  // },
+  // buttonAdd: {
+  //   color: "#FFFFFF",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   backgroundColor: "#FF6C00",
+  //   borderRadius: 20,
+  //   width: 70,
+  //   height: 40,
+  // },
+  // tool: {
+  //   height: 40,
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  // },
+  // user: {
+  //   height: 40,
+  //   alignItems: "center",
+  //   justifyContent: "center",
 });

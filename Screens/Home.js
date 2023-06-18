@@ -1,24 +1,114 @@
-import { View } from "react-native";
+import React from "react";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Feather, MaterialIcons, AntDesign } from "@expo/vector-icons";
+
+import CreatePostsScreen from "./CreatePostsScreen";
+import ProfileScreen from "./ProfileScreen";
 import { PostsScreen } from "./PostsScreen";
-// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-// import Add from "./Components/Add";
-// import User from "./Components/User";
-// import Tool from "./Components/Tool";
-// import { NavigationContainer } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
-// const Tabs = createBottomTabNavigator();
+const Tabs = createBottomTabNavigator();
 
-const Home = () => {
+const Home = ({}) => {
+  const navigation = useNavigation();
+  // const dispatch = useDispatch();
+
   return (
-    <View>
-      <PostsScreen />
-    </View>
-
-    // <Tabs.Navigator>
-    //   <Tabs.Screen name="add" component={Add} />
-    //   <Tabs.Screen name="user" component={User} />
-    //   <Tabs.Screen name="tool" component={Tool} />
-    // </Tabs.Navigator>
+    <Tabs.Navigator screenOptions={{ tabBarShowLabel: false }}>
+      <Tabs.Screen
+        name="Posts"
+        component={PostsScreen}
+        options={{
+          title: "Publications",
+          headerTitleStyle: styles.headerTitle,
+          headerRight: () => (
+            <TouchableOpacity>
+              <MaterialIcons name="logout" size={24} color="#BDBDBD" />
+            </TouchableOpacity>
+          ),
+          headerLeftContainerStyle: styles.headerLeft,
+          headerRightContainerStyle: styles.headerRight,
+          tabBarIcon: ({ focused, size, color }) => {
+            return (
+              <Feather
+                name="grid"
+                size={size}
+                color={focused ? "#FF6C00" : "rgba(33, 33, 33, 0.8)"}
+              />
+            );
+          },
+        }}
+      />
+      <Tabs.Screen
+        name="CreatePost"
+        component={CreatePostsScreen}
+        options={{
+          unmountOnBlur: true,
+          tabBarStyle: { display: "none" },
+          title: "Create Post",
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <AntDesign
+                name="arrowleft"
+                size={24}
+                color="rgba(33, 33, 33, 0.8)"
+              />
+            </TouchableOpacity>
+          ),
+          headerLeftContainerStyle: styles.headerLeft,
+          headerRightContainerStyle: styles.headerRight,
+          tabBarIcon: ({ focused, size, color }) => {
+            return (
+              <View style={styles.ovalIcon}>
+                <Feather name="plus" size={20} color={"#FFFFFF"} />
+              </View>
+            );
+          },
+        }}
+      />
+      <Tabs.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused, size, color }) => {
+            return (
+              <Feather
+                name="user"
+                size={size}
+                color={focused ? "#FF6C00" : "rgba(33, 33, 33, 0.8)"}
+              />
+            );
+          },
+        }}
+      />
+    </Tabs.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  ovalIcon: {
+    width: 70,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "#FF6C00",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  headerTitle: {
+    // fontFamily: "Roboto-Medium",
+    fontSize: 17,
+    lineHeight: 22,
+    // letterSpacing: -0.4,
+    color: "#212121",
+  },
+  headerRight: {
+    paddingRight: 16,
+  },
+  headerLeft: {
+    paddingLeft: 16,
+  },
+});
+
 export default Home;

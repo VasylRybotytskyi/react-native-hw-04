@@ -1,12 +1,9 @@
 import React from "react";
 import { Text, View, StyleSheet, Dimensions } from "react-native";
 import { Ionicons, Feather } from "@expo/vector-icons";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
-import { BottomBar } from "./Components/BottomBar";
-// import { CreatePostsScreen } from "./CreatePostsScreen";
-
-const Tabs = createBottomTabNavigator();
+// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+// import { NavigationContainer } from "@react-navigation/native";
+// import { BottomBar } from "./Components/BottomBar";
 
 const windowWidth = Dimensions.get("window").width; // Для ширини екрану
 const windowHeight = Dimensions.get("window").height; // Для висоти екрану
@@ -16,7 +13,7 @@ const windowHeight = Dimensions.get("window").height; // Для висоти е�
 export const PostsScreen = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <Text style={styles.headerText}>Публікації</Text>
         <Ionicons
           style={styles.logout}
@@ -24,12 +21,8 @@ export const PostsScreen = () => {
           size={24}
           color="rgba(189, 189, 189, 1)"
         />
-      </View>
-      {/* <Tabs.Navigator>
-        <Tabs.Screen name="add" component={CreatePostsScreen} />
-        <Tabs.Screen name="user" component={BottomBar} />
-      </Tabs.Navigator> */}
-      <BottomBar />
+      </View> */}
+      {/* <BottomBar /> */}
     </View>
   );
 };

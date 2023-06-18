@@ -11,10 +11,10 @@ import { AntDesign, EvilIcons, Entypo, Feather } from "@expo/vector-icons";
 
 const windowWidth = Dimensions.get("window").width; // Для ширини екрану
 const windowHeight = Dimensions.get("window").height; // Для висоти екрану
-export const CreatePostsScreen = () => {
+const CreatePostsScreen = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <Text style={styles.headerText}>Створити публікацію</Text>
         <AntDesign
           style={styles.arrowLeft}
@@ -22,7 +22,7 @@ export const CreatePostsScreen = () => {
           size={24}
           color="black"
         />
-      </View>
+      </View> */}
       <View style={styles.content}>
         <View style={styles.contentImage}>
           <Entypo
@@ -55,6 +55,8 @@ export const CreatePostsScreen = () => {
     </View>
   );
 };
+
+export default CreatePostsScreen;
 
 const styles = StyleSheet.create({
   container: {
