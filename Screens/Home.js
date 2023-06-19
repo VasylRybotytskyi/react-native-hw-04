@@ -19,7 +19,8 @@ const Home = () => {
         name="Posts"
         component={PostsScreen}
         options={{
-          title: "Publications",
+          title: "Публікації",
+          headerTitleAlign: "center", // Додаємо параметр headerTitleAlign
           headerTitleStyle: styles.headerTitle,
           headerRight: () => (
             <TouchableOpacity>
@@ -45,7 +46,8 @@ const Home = () => {
         options={{
           unmountOnBlur: true,
           tabBarStyle: { display: "none" },
-          title: "Create Post",
+          title: "Створити публікацію",
+          headerTitleAlign: "center", // Додаємо параметр headerTitleAlign
           headerLeft: () => (
             <TouchableOpacity onPress={() => navigation.navigate("Posts")}>
               <AntDesign
