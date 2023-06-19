@@ -1,30 +1,11 @@
 import React from "react";
 import { Text, View, StyleSheet, Dimensions } from "react-native";
-import { Ionicons, Feather } from "@expo/vector-icons";
-// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-// import { NavigationContainer } from "@react-navigation/native";
-// import { BottomBar } from "./Components/BottomBar";
 
 const windowWidth = Dimensions.get("window").width; // Для ширини екрану
 const windowHeight = Dimensions.get("window").height; // Для висоти екрану
 
-// const Tabs = createBottomTabNavigator();
-
 export const PostsScreen = () => {
-  return (
-    <View style={styles.container}>
-      {/* <View style={styles.header}>
-        <Text style={styles.headerText}>Публікації</Text>
-        <Ionicons
-          style={styles.logout}
-          name="exit-outline"
-          size={24}
-          color="rgba(189, 189, 189, 1)"
-        />
-      </View> */}
-      {/* <BottomBar /> */}
-    </View>
-  );
+  return <View style={styles.container}></View>;
 };
 
 const styles = StyleSheet.create({

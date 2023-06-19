@@ -10,9 +10,8 @@ import { useNavigation } from "@react-navigation/native";
 
 const Tabs = createBottomTabNavigator();
 
-const Home = ({}) => {
+const Home = () => {
   const navigation = useNavigation();
-  // const dispatch = useDispatch();
 
   return (
     <Tabs.Navigator screenOptions={{ tabBarShowLabel: false }}>
@@ -48,7 +47,7 @@ const Home = ({}) => {
           tabBarStyle: { display: "none" },
           title: "Create Post",
           headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.goBack()}>
+            <TouchableOpacity onPress={() => navigation.navigate("Posts")}>
               <AntDesign
                 name="arrowleft"
                 size={24}
@@ -97,10 +96,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   headerTitle: {
-    // fontFamily: "Roboto-Medium",
     fontSize: 17,
     lineHeight: 22,
-    // letterSpacing: -0.4,
     color: "#212121",
   },
   headerRight: {
