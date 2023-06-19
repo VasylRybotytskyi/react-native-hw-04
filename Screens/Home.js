@@ -14,13 +14,18 @@ const Home = () => {
   const navigation = useNavigation();
 
   return (
-    <Tabs.Navigator screenOptions={{ tabBarShowLabel: false }}>
+    <Tabs.Navigator
+      screenOptions={{
+        tabBarShowLabel: false,
+        tabBarStyle: { paddingTop: 9, paddingBottom: 34, height: 83 }, // Змінюємо висоту на 83
+      }}
+    >
       <Tabs.Screen
         name="Posts"
         component={PostsScreen}
         options={{
           title: "Публікації",
-          headerTitleAlign: "center", // Додаємо параметр headerTitleAlign
+          headerTitleAlign: "center",
           headerTitleStyle: styles.headerTitle,
           headerRight: () => (
             <TouchableOpacity>
@@ -47,7 +52,7 @@ const Home = () => {
           unmountOnBlur: true,
           tabBarStyle: { display: "none" },
           title: "Створити публікацію",
-          headerTitleAlign: "center", // Додаємо параметр headerTitleAlign
+          headerTitleAlign: "center",
           headerLeft: () => (
             <TouchableOpacity onPress={() => navigation.navigate("Posts")}>
               <AntDesign
