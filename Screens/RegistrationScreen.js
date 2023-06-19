@@ -16,6 +16,7 @@ import { AntDesign } from "@expo/vector-icons";
 import InputPassword from "../components/InputPassword";
 import InputDefault from "../components/InputDefault";
 import { useNavigation } from "@react-navigation/native";
+import BgImage from "../components/BgImage";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -62,10 +63,11 @@ const RegistrationScreen = ({ navigation }) => {
   return (
     <TouchableWithoutFeedback onPress={handleUseKeyboard}>
       <View style={styles.container}>
-        <ImageBackground
+        {/* <ImageBackground
           source={require("../assets/images/photoBg.png")}
           style={styles.imageBackground}
-        >
+        > */}
+        <BgImage>
           <View style={styles.contentContainer}>
             <View style={styles.image}>
               <AntDesign style={styles.add} name="pluscircleo" size={25} />
@@ -111,7 +113,7 @@ const RegistrationScreen = ({ navigation }) => {
               </TouchableOpacity>
             </View>
           </View>
-        </ImageBackground>
+        </BgImage>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -128,20 +130,18 @@ const styles = StyleSheet.create({
     height: windowHeight,
   },
   contentContainer: {
-    display: "flex",
-    gap: 16,
-    backgroundColor: "rgba(255, 255, 255, 1)",
-    paddingTop: 92,
-    paddingBottom: 144,
-    paddingLeft: 16,
-    paddingRight: 16,
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    width: windowWidth,
+    backgroundColor: "#fff",
+    position: "relative",
+
+    width: "100%",
     alignItems: "center",
+
+    paddingTop: 92,
+    // paddingBottom: 110,
+    paddingHorizontal: 10,
+
+    borderTopRightRadius: 25,
+    borderTopLeftRadius: 25,
   },
   title: {
     fontWeight: "500",
