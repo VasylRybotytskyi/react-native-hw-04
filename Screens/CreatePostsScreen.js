@@ -14,15 +14,6 @@ const windowHeight = Dimensions.get("window").height; // Для висоти е�
 const CreatePostsScreen = () => {
   return (
     <View style={styles.container}>
-      {/* <View style={styles.header}>
-        <Text style={styles.headerText}>Створити публікацію</Text>
-        <AntDesign
-          style={styles.arrowLeft}
-          name="arrowleft"
-          size={24}
-          color="black"
-        />
-      </View> */}
       <View style={styles.content}>
         <View style={styles.contentImage}>
           <Entypo
@@ -62,46 +53,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "space-between",
-  },
-  header: {
-    position: "relative",
-    justifyContent: "center",
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 16,
-    paddingTop: 55,
-    paddingBottom: 11,
-    borderBottomWidth: 1,
-    width: windowWidth,
-    borderColor: "rgba(232, 232, 232, 1)",
-  },
-  headerText: {
-    color: "#212121",
-    fontSize: 17,
-    fontWeight: "500",
-  },
-  arrowLeft: {
-    position: "absolute",
-    left: 10,
-    bottom: 12,
-  },
-  iconsContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 93,
-    paddingBottom: 42,
-    paddingTop: 9,
-  },
-  buttonAdd: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#F6F6F6",
-    borderRadius: 20,
-    width: 70,
-    height: 40,
+    backgroundColor: "#FFFFFF", // Задній фон білий
   },
   content: {
     paddingHorizontal: 16,
+    paddingVertical: 32,
   },
   contentImage: {
     backgroundColor: "#F6F6F6",
@@ -161,5 +117,20 @@ const styles = StyleSheet.create({
   iconMap: {
     position: "absolute",
     top: 110,
+  },
+  iconsContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 93,
+    paddingBottom: 42,
+    paddingTop: 9,
+  },
+  buttonAdd: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#F6F6F6",
+    borderRadius: 20,
+    width: 70,
+    height: 40,
   },
 });

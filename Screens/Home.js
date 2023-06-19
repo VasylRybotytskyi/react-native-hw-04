@@ -32,6 +32,7 @@ const Home = () => {
               <MaterialIcons name="logout" size={24} color="#BDBDBD" />
             </TouchableOpacity>
           ),
+          headerStyle: styles.header, // Додаємо стиль header
           headerLeftContainerStyle: styles.headerLeft,
           headerRightContainerStyle: styles.headerRight,
           tabBarIcon: ({ focused, size, color }) => {
@@ -62,6 +63,7 @@ const Home = () => {
               />
             </TouchableOpacity>
           ),
+          headerStyle: styles.header, // Додаємо стиль header
           headerLeftContainerStyle: styles.headerLeft,
           headerRightContainerStyle: styles.headerRight,
           tabBarIcon: ({ focused, size, color }) => {
@@ -112,6 +114,10 @@ const styles = StyleSheet.create({
   },
   headerLeft: {
     paddingLeft: 16,
+  },
+  header: {
+    borderBottomWidth: 1,
+    borderBottomColor: "rgba(189, 189, 189, 1)",
   },
 });
 

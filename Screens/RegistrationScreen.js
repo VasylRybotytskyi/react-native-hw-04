@@ -13,40 +13,41 @@ import {
 } from "react-native";
 import { Button } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
+import InputPassword from "../components/InputPassword";
+import InputDefault from "../components/InputDefault";
+import { useNavigation } from "@react-navigation/native";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const RegistrationScreen = ({ navigation }) => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [isLoginFocused, setLoginFocused] = useState(false);
-  const [isEmailFocused, setEmailFocused] = useState(false);
-  const [isPasswordFocused, setPasswordFocused] = useState(false);
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+  const [isShowKeyboard, isSetShowKeyboard] = useState(false);
+  const [nameActiveInput, setNameActiveInput] = useState("");
+
+  const { navigate } = useNavigation();
+  // const dispatch = useDispatch();
+
+  const handleActive = (focus, name) => {
+    if (focus === "onFocus") {
+      name === "login" && setNameActiveInput("login");
+      name === "email" && setNameActiveInput("email");
+      name === "password" && setNameActiveInput("password");
+
+      return isSetShowKeyboard(true);
+    }
+    if (focus === "onBlur") {
+      setNameActiveInput("");
+      isSetShowKeyboard(false);
+    }
   };
 
-  const handleLoginFocus = () => {
-    setLoginFocused(true);
-  };
-  const handleLoginBlur = () => {
-    setLoginFocused(false);
-  };
-  const handleEmailFocus = () => {
-    setEmailFocused(true);
-  };
-  const handleEmailBlur = () => {
-    setEmailFocused(false);
-  };
-  const handlePasswordFocus = () => {
-    setPasswordFocused(true);
-  };
-  const handlePasswordBlur = () => {
-    setPasswordFocused(false);
+  const handleUseKeyboard = () => {
+    isSetShowKeyboard(false);
+    Keyboard.dismiss();
   };
 
   const register = () => {
@@ -59,7 +60,7 @@ const RegistrationScreen = ({ navigation }) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback onPress={handleUseKeyboard}>
       <View style={styles.container}>
         <ImageBackground
           source={require("../assets/images/photoBg.png")}
@@ -70,41 +71,28 @@ const RegistrationScreen = ({ navigation }) => {
               <AntDesign style={styles.add} name="pluscircleo" size={25} />
             </View>
             <Text style={styles.title}>Реєстрація</Text>
-            <TextInput
-              style={[styles.input, isLoginFocused && styles.inputFocused]}
+            <InputDefault
+              nameActiveInput={nameActiveInput}
               placeholder="Логін"
-              onFocus={handleLoginFocus}
-              onBlur={handleLoginBlur}
+              setChange={setLogin}
+              handleActive={handleActive}
+              name="login"
               value={login}
-              onChangeText={setLogin}
             />
-            <TextInput
-              style={[styles.input, isEmailFocused && styles.inputFocused]}
+            <InputDefault
+              nameActiveInput={nameActiveInput}
               placeholder="Адреса електронної пошти"
-              onFocus={handleEmailFocus}
-              onBlur={handleEmailBlur}
+              setChange={setEmail}
+              handleActive={handleActive}
+              name="email"
               value={email}
-              onChangeText={setEmail}
             />
-            <View style={styles.passwordInputContainer}>
-              <TextInput
-                style={[
-                  styles.passwordInput,
-                  isPasswordFocused && styles.inputFocused,
-                ]}
-                placeholder="Пароль"
-                secureTextEntry={!showPassword}
-                onFocus={handlePasswordFocus}
-                onBlur={handlePasswordBlur}
-                value={password}
-                onChangeText={setPassword}
-              />
-              <TouchableOpacity onPress={togglePasswordVisibility}>
-                <Text style={styles.passwordToggleText}>
-                  {showPassword ? "Сховати" : "Показати"}
-                </Text>
-              </TouchableOpacity>
-            </View>
+            <InputPassword
+              nameActiveInput={nameActiveInput}
+              setPassword={setPassword}
+              password={password}
+              handleActive={handleActive}
+            />
             <TouchableOpacity style={styles.buttonContainer}>
               <Button
                 title="Зареєструватися"
@@ -133,7 +121,7 @@ export default RegistrationScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    position: "relative",
+    backgroundColor: "#fff",
   },
   imageBackground: {
     width: windowWidth,
@@ -171,9 +159,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 10,
   },
-  inputFocused: {
-    borderColor: "#FF6C00",
-  },
+
   buttonContainer: {
     width: "100%",
   },
