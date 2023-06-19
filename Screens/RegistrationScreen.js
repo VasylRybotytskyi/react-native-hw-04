@@ -63,12 +63,17 @@ const RegistrationScreen = ({ navigation }) => {
   return (
     <TouchableWithoutFeedback onPress={handleUseKeyboard}>
       <View style={styles.container}>
-        {/* <ImageBackground
-          source={require("../assets/images/photoBg.png")}
-          style={styles.imageBackground}
-        > */}
         <BgImage>
-          <View style={styles.contentContainer}>
+          <View
+            style={{
+              ...styles.contentContainer,
+              paddingBottom: isShowKeyboard
+                ? Platform.OS == "ios"
+                  ? 230
+                  : 32
+                : 45,
+            }}
+          >
             <View style={styles.image}>
               <AntDesign style={styles.add} name="pluscircleo" size={25} />
             </View>
@@ -137,8 +142,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
 
     paddingTop: 92,
-    // paddingBottom: 110,
-    paddingHorizontal: 10,
+    paddingHorizontal: 16,
 
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
@@ -149,6 +153,7 @@ const styles = StyleSheet.create({
     lineHeight: 35,
     textAlign: "center",
     color: "#212121",
+    marginBottom: 16,
   },
   input: {
     width: "100%",
@@ -169,6 +174,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
   registerContainer: {
+    marginTop: 16,
     flexDirection: "row",
     justifyContent: "center",
   },
@@ -194,26 +200,5 @@ const styles = StyleSheet.create({
     bottom: 20,
     right: -12,
     color: "rgba(255, 108, 0, 1)",
-  },
-  passwordInputContainer: {
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    borderWidth: 1,
-    borderColor: "rgba(232, 232, 232, 1)",
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    backgroundColor: "#F6F6F6",
-  },
-  passwordInput: {
-    flex: 1,
-    height: 50,
-    backgroundColor: "#F6F6F6",
-  },
-  passwordToggleText: {
-    color: "#1B4371",
-    fontWeight: "400",
-    fontSize: 16,
   },
 });
