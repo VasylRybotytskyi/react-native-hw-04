@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     lineHeight: 19,
 
     padding: 16,
-    fontFamily: "Roboto-Regular",
+    // fontFamily: "Roboto-Regular",
 
     backgroundColor: "#F6F6F6",
     borderWidth: 1,

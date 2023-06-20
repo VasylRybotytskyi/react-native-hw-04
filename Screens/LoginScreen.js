@@ -11,18 +11,22 @@ import {
   Keyboard,
 } from "react-native";
 import { Button } from "react-native-elements";
+import BgImage from "../components/BgImage";
+import InputDefault from "../components/InputDefault";
+import InputPassword from "../components/InputPassword";
+import { useNavigation } from "@react-navigation/native";
 
 const windowWidth = Dimensions.get("window").width; // Для ширини екрану
 const windowHeight = Dimensions.get("window").height; // Для висоти екрану
 
 const LoginScreen = ({ navigation }) => {
-  const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  const [isShowKeyboard, isSetShowKeyboard] = useState(false);
+  const [nameActiveInput, setNameActiveInput] = useState("");
+  const { navigate } = useNavigation();
+  // const dispatch = useDispatch();
 
   const signIn = () => {
     console.debug("SingIn!");
@@ -30,35 +34,58 @@ const LoginScreen = ({ navigation }) => {
     console.debug("Password:", password);
     navigation.navigate("Home");
   };
+
+  const handleActive = (focus, name) => {
+    if (focus === "onFocus") {
+      name === "email"
+        ? setNameActiveInput("email")
+        : setNameActiveInput("password");
+      return isSetShowKeyboard(true);
+    }
+    if (focus === "onBlur") {
+      setNameActiveInput("");
+      isSetShowKeyboard(false);
+    }
+  };
+
+  const handleUseKeyboard = () => {
+    isSetShowKeyboard(false);
+    Keyboard.dismiss();
+  };
+
+  // const handleSubmit = () => {
+  //   if (email === '' || password === '') {
+  //     return;
+  //   }
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback onPress={handleUseKeyboard}>
       <View style={styles.container}>
-        <ImageBackground
-          source={require("../assets/images/photoBg.png")}
-          style={styles.imageBackground}
-        >
-          <View style={styles.contentContainer}>
+        <BgImage>
+          <View
+            style={{
+              ...styles.contentContainer,
+              paddingBottom: isShowKeyboard
+                ? Platform.OS == "ios"
+                  ? 260
+                  : 32
+                : 110,
+            }}
+          >
             <Text style={styles.title}>Увійти</Text>
-            <TextInput
-              style={styles.input}
+            <InputDefault
+              nameActiveInput={nameActiveInput}
               placeholder="Адреса електронної пошти"
+              setChange={setEmail}
+              handleActive={handleActive}
+              name="email"
               value={email}
-              onChangeText={setEmail}
             />
-            <View style={styles.passwordInputContainer}>
-              <TextInput
-                style={styles.passwordInput}
-                placeholder="Пароль"
-                secureTextEntry={!showPassword}
-                value={password}
-                onChangeText={setPassword}
-              />
-              <TouchableOpacity onPress={togglePasswordVisibility}>
-                <Text style={styles.passwordToggleText}>
-                  {showPassword ? "Сховати" : "Показати"}
-                </Text>
-              </TouchableOpacity>
-            </View>
+            <InputPassword
+              nameActiveInput={nameActiveInput}
+              setPassword={setPassword}
+              password={password}
+              handleActive={handleActive}
+            />
             <TouchableOpacity style={styles.buttonContainer}>
               <Button
                 title="Увійти"
@@ -78,7 +105,7 @@ const LoginScreen = ({ navigation }) => {
               </TouchableOpacity>
             </View>
           </View>
-        </ImageBackground>
+        </BgImage>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -89,25 +116,14 @@ const styles = StyleSheet.create({
     position: "relative",
     flex: 1,
   },
-  imageBackground: {
-    width: windowWidth,
-    height: windowHeight,
-  },
   contentContainer: {
-    display: "flex",
-    gap: 16,
-    backgroundColor: "rgba(255, 255, 255, 1)",
-    paddingTop: 92,
-    paddingBottom: 144,
-    paddingLeft: 16,
-    paddingRight: 16,
-    borderTopLeftRadius: 25,
+    backgroundColor: "#fff",
+    width: "100%",
+    alignItems: "center",
+    paddingTop: 32,
+    paddingHorizontal: 10,
     borderTopRightRadius: 25,
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    width: windowWidth,
-    alignItems: "center", // Відцентровує горизонтально
+    borderTopLeftRadius: 25,
   },
   title: {
     fontWeight: "500",
@@ -115,18 +131,12 @@ const styles = StyleSheet.create({
     lineHeight: 35,
     textAlign: "center",
     color: "#212121",
+    marginBottom: 16,
   },
-  input: {
-    width: "100%",
-    height: 50,
-    backgroundColor: "#F6F6F6",
-    borderWidth: 1,
-    borderColor: "rgba(232, 232, 232, 1)",
-    borderRadius: 5,
-    paddingHorizontal: 10,
-  },
+
   buttonContainer: {
     width: "100%",
+    marginBottom: 16,
   },
   button: {
     backgroundColor: "#FF6C00",

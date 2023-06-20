@@ -11,12 +11,14 @@ import {
   Keyboard,
   KeyboardAvoidingView,
 } from "react-native";
-import { Button } from "react-native-elements";
+import { Platform } from "react-native";
+
 import { AntDesign } from "@expo/vector-icons";
 import InputPassword from "../components/InputPassword";
 import InputDefault from "../components/InputDefault";
 import { useNavigation } from "@react-navigation/native";
 import BgImage from "../components/BgImage";
+import ButtonSubmit from "../components/ButtonSabmit";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -100,13 +102,7 @@ const RegistrationScreen = ({ navigation }) => {
               password={password}
               handleActive={handleActive}
             />
-            <TouchableOpacity style={styles.buttonContainer}>
-              <Button
-                title="Зареєструватися"
-                buttonStyle={styles.button}
-                onPress={register}
-              />
-            </TouchableOpacity>
+            <ButtonSubmit title={"Зареєстуватися"} onSubmit={register} />
             <View style={styles.registerContainer}>
               <Text style={styles.registerText}>Вже є акаунт?</Text>
               <TouchableOpacity
