@@ -13,12 +13,13 @@ import {
 } from "react-native";
 import { Platform } from "react-native";
 
+import { Button } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 import InputPassword from "../components/InputPassword";
 import InputDefault from "../components/InputDefault";
 import { useNavigation } from "@react-navigation/native";
 import BgImage from "../components/BgImage";
-import ButtonSubmit from "../components/ButtonSabmit";
+import * as yup from "yup";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -62,6 +63,23 @@ const RegistrationScreen = ({ navigation }) => {
     navigation.navigate("Home");
   };
 
+  const validationSchema = yup.object().shape({
+    login: yup.string().required("Login is required"),
+    email: yup.string().email("Invalid email").required("Email is required"),
+    password: yup.string().required("Password is required"),
+  });
+
+  const handleSubmit = () => {
+    validationSchema
+      .validate({ login, email, password })
+      .then(() => {
+        register();
+      })
+      .catch((error) => {
+        console.log("Validation Error:", error.message);
+      });
+  };
+
   return (
     <TouchableWithoutFeedback onPress={handleUseKeyboard}>
       <View style={styles.container}>
@@ -102,7 +120,13 @@ const RegistrationScreen = ({ navigation }) => {
               password={password}
               handleActive={handleActive}
             />
-            <ButtonSubmit title={"Зареєстуватися"} onSubmit={register} />
+            <TouchableOpacity style={styles.buttonContainer}>
+              <Button
+                title="Зареєструватися"
+                buttonStyle={styles.button}
+                onPress={handleSubmit}
+              />
+            </TouchableOpacity>
             <View style={styles.registerContainer}>
               <Text style={styles.registerText}>Вже є акаунт?</Text>
               <TouchableOpacity
@@ -121,6 +145,7 @@ const RegistrationScreen = ({ navigation }) => {
 };
 
 export default RegistrationScreen;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -133,13 +158,10 @@ const styles = StyleSheet.create({
   contentContainer: {
     backgroundColor: "#fff",
     position: "relative",
-
     width: "100%",
     alignItems: "center",
-
     paddingTop: 92,
     paddingHorizontal: 16,
-
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
   },
@@ -160,7 +182,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 10,
   },
-
   buttonContainer: {
     width: "100%",
   },

@@ -1,35 +1,30 @@
 import React, { useState } from "react";
 import {
-  ImageBackground,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
   StyleSheet,
-  Dimensions,
   TouchableWithoutFeedback,
   Keyboard,
+  Platform,
 } from "react-native";
 import { Button } from "react-native-elements";
 import BgImage from "../components/BgImage";
 import InputDefault from "../components/InputDefault";
 import InputPassword from "../components/InputPassword";
 import { useNavigation } from "@react-navigation/native";
-
-const windowWidth = Dimensions.get("window").width; // Для ширини екрану
-const windowHeight = Dimensions.get("window").height; // Для висоти екрану
+import * as yup from "yup";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [isShowKeyboard, isSetShowKeyboard] = useState(false);
+  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [nameActiveInput, setNameActiveInput] = useState("");
   const { navigate } = useNavigation();
-  // const dispatch = useDispatch();
 
   const signIn = () => {
-    console.debug("SingIn!");
+    console.debug("SignIn!");
     console.debug("Email:", email);
     console.debug("Password:", password);
     navigation.navigate("Home");
@@ -40,23 +35,35 @@ const LoginScreen = ({ navigation }) => {
       name === "email"
         ? setNameActiveInput("email")
         : setNameActiveInput("password");
-      return isSetShowKeyboard(true);
+      return setIsShowKeyboard(true);
     }
     if (focus === "onBlur") {
       setNameActiveInput("");
-      isSetShowKeyboard(false);
+      setIsShowKeyboard(false);
     }
   };
 
   const handleUseKeyboard = () => {
-    isSetShowKeyboard(false);
+    setIsShowKeyboard(false);
     Keyboard.dismiss();
   };
 
-  // const handleSubmit = () => {
-  //   if (email === '' || password === '') {
-  //     return;
-  //   }
+  const validationSchema = yup.object().shape({
+    email: yup.string().email("Invalid email").required("Email is required"),
+    password: yup.string().required("Password is required"),
+  });
+
+  const handleSubmit = () => {
+    validationSchema
+      .validate({ email, password })
+      .then(() => {
+        signIn();
+      })
+      .catch((error) => {
+        console.log("Validation Error:", error.message);
+      });
+  };
+
   return (
     <TouchableWithoutFeedback onPress={handleUseKeyboard}>
       <View style={styles.container}>
@@ -90,7 +97,7 @@ const LoginScreen = ({ navigation }) => {
               <Button
                 title="Увійти"
                 buttonStyle={styles.button}
-                onPress={signIn}
+                onPress={handleSubmit}
               />
             </TouchableOpacity>
             <View style={styles.registerContainer}>
@@ -155,41 +162,6 @@ const styles = StyleSheet.create({
   registerLink: {
     color: "rgba(27, 67, 113, 1)",
     marginLeft: 5,
-  },
-  image: {
-    position: "absolute",
-    width: 120,
-    height: 120,
-    backgroundColor: "#F6F6F6",
-    borderRadius: 16,
-    top: -60,
-  },
-  add: {
-    position: "absolute",
-    bottom: 20,
-    right: -12,
-    color: "rgba(255, 108, 0, 1)",
-  },
-  passwordInputContainer: {
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    borderWidth: 1,
-    borderColor: "rgba(232, 232, 232, 1)",
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    backgroundColor: "#F6F6F6",
-  },
-  passwordInput: {
-    flex: 1,
-    height: 50,
-    backgroundColor: "#F6F6F6",
-  },
-  passwordToggleText: {
-    color: "#1B4371",
-    fontWeight: "400",
-    fontSize: 16,
   },
 });
 
